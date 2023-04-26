@@ -1,17 +1,18 @@
 //You can edit ALL of the code here
-function setup() {
-  const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
-  // const oneEpisode = getOneEpisode();
-  // createNewEpisodeCard(oneEpisode)
-  createAllCards()
-  
-}
 
-function createAllCards(){
-  const allEpisodes = getAllEpisodes();
-  allEpisodes.forEach((episode)=>{
-    createNewEpisodeCard(episode)
+let allEpisodes;
+let filteredNames;
+
+function setup() {
+    allEpisodes = getAllEpisodes();
+    // makePageForEpisodes(allEpisodes);
+    createAllCards(allEpisodes)
+    serchBarFunction()
+  }
+
+function createAllCards(givenEpisodes){
+  givenEpisodes.map((episode)=>{
+    return createNewEpisodeCard(episode)
   })
 }
 
@@ -40,7 +41,7 @@ function createNewEpisodeCard(objectEpisod){
 
   imageSection.classList.add("img")
   let description = document.createElement("p")
-  description.classList.add("description-eposode")
+  description.classList.add("description-episode")
   description.innerText = objectEpisod.summary
 
   mainDiv.appendChild(newCard)
@@ -51,6 +52,30 @@ function createNewEpisodeCard(objectEpisod){
   newCard.appendChild(imageSection)
   newCard.appendChild(description)
 }
+
+ let countEpisodes = document.querySelector("#count-episodes")
+ countEpisodes.innerText = `Displaying ${allEpisodes.length} of ${allEpisodes.length}`
+
+ function serchBarFunction(){
+    let searchBar = document.querySelector("#search")
+    searchBar.addEventListener( "keyup", (e) => {
+      let searchString = e.target.value.toLowerCase()
+
+        filteredNames = allEpisodes.filter((episode)=>{
+          return episode.name.toLowerCase().includes(searchString)
+        })
+   
+        countEpisodes.innerText = `Displaying ${filteredNames.length} of ${allEpisodes.length}`
+    
+        let mainDiv = document.querySelector("#main-div");
+        mainDiv.innerHTML = ""
+        createAllCards(filteredNames)
+      })
+  
+  }
+  
+  
+
 
 
 

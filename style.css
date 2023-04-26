@@ -5,11 +5,52 @@
 body{
   background-color: rgb(172, 168, 164);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   gap: 3rem;
   margin-top: 2rem;
 }
+
+#searchbar-wraper{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+}
+
+#search{
+  border: solid rgb(73, 73, 73) 0.01rem;
+  border-radius: 0.5rem;
+  height: 2rem;
+  text-align: end;
+  width: 100%;
+  position: relative;
+}
+
+.logo_image{
+  width: 30%;
+}
+
+#input_img{
+position: absolute;
+width: 1.5rem;
+margin-left: 0.3rem;
+}
+
+form {
+  border-radius: 0.5rem;
+  height: 2rem;
+  text-align: end;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
 
 .title-of-episode{
 
@@ -42,7 +83,7 @@ body{
   margin-top: 1rem;
 }
 
-.description-eposode{
+.description-episode{
   margin: 1rem;
   text-align: justify;
 }
@@ -51,7 +92,9 @@ body{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap:2rem
+  gap:2rem;
+  align-content: center;
+  justify-content: center;
 }
 
 
