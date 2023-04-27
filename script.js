@@ -5,9 +5,9 @@ let filteredNames;
 
 function setup() {
     allEpisodes = getAllEpisodes();
-    // makePageForEpisodes(allEpisodes);
     createAllCards(allEpisodes)
     serchBarFunction()
+    createSelectandChoose(allEpisodes)
   }
 
 function createAllCards(givenEpisodes){
@@ -54,25 +54,62 @@ function createNewEpisodeCard(objectEpisod){
 }
 
  let countEpisodes = document.querySelector("#count-episodes")
- countEpisodes.innerText = `Displaying ${allEpisodes.length} of ${allEpisodes.length}`
 
- function serchBarFunction(){
+function serchBarFunction(){
     let searchBar = document.querySelector("#search")
     searchBar.addEventListener( "keyup", (e) => {
       let searchString = e.target.value.toLowerCase()
 
         filteredNames = allEpisodes.filter((episode)=>{
-          return episode.name.toLowerCase().includes(searchString)
+          return (
+            episode.name.toLowerCase().includes(searchString) || 
+            episode.summary.toLowerCase().includes(searchString)
+          )
         })
-   
         countEpisodes.innerText = `Displaying ${filteredNames.length} of ${allEpisodes.length}`
-    
         let mainDiv = document.querySelector("#main-div");
         mainDiv.innerHTML = ""
         createAllCards(filteredNames)
-      })
+    })
   
-  }
+}
+
+let selectEpisodes 
+let mainDiv = document.querySelector("#main-div");
+
+function createSelectandChoose (givenEpisode){
+  selectEpisodes = document.querySelector("#select-episodes")
+  givenEpisode.map((episode)=>{
+    let optionElement = document.createElement("option")
+    optionElement.innerText = `${episode.name} -E${episode.number.toString().padStart(2, "0")}-S${episode.season.toString().padStart(2, "0")}`
+    selectEpisodes.appendChild(optionElement)
+  })
+
+  selectEpisodes.addEventListener("change", (event) =>{
+    let currentValue = event.target.value
+    givenEpisode.forEach((episode) =>{
+      if(currentValue.includes(episode.name)){
+        mainDiv.innerHTML = ""
+        createNewEpisodeCard(episode)
+      }
+    }) 
+  }) 
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
 

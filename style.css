@@ -14,11 +14,18 @@ body{
 
 #searchbar-wraper{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 2rem;
   align-items: center;
-  justify-content: left;
+  justify-content: center;
   width: 100%;
+}
+
+#select-episodes{
+  border: solid rgb(73, 73, 73) 0.01rem;
+  border-radius: 0.5rem;
+  height: 2rem;
+  padding: 0 0.5rem;
 }
 
 #search{
