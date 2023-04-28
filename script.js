@@ -3,8 +3,31 @@
 let allEpisodes;
 let filteredNames;
 
+let allEpisodesFromApi
+
+
+fetch('https://api.tvmaze.com/shows/82/episodes')
+    .then((response) => {
+      if (response.ok){
+        return response.json();
+      } else {
+        console.log("Error") 
+      }
+    })
+    .then((data) => {
+      allEpisodes = data
+    }); 
+
+
+
+
+
+
+
+
 function setup() {
-    allEpisodes = getAllEpisodes();
+    
+    
     createAllCards(allEpisodes)
     serchBarFunction()
     createSelectandChoose(allEpisodes)
