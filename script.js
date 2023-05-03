@@ -89,6 +89,7 @@ function serchBarFunction(){
 
 function createSelectandChooseEpisode (givenEpisode){
   selectEpisodes = document.querySelector("#select-episodes")
+  selectEpisodes.innerHTML = ""
   givenEpisode.map((episode)=>{
     let optionElement = document.createElement("option")
     optionElement.innerText = `${episode.name} -E${episode.number.toString().padStart(2, "0")}-S${episode.season.toString().padStart(2, "0")}`
@@ -113,6 +114,7 @@ function selectTvShow(tvShow){
     
     tvShow.map((oneShow) =>{
       let optionShow = document.createElement("option")
+      optionShow.innerHTML = ""
       optionShow.innerText = oneShow.name
       selectShow.appendChild(optionShow)
     })
