@@ -2,40 +2,27 @@
 
 let allEpisodes;
 let filteredNames;
-
-let allEpisodesFromApi
-
-
-fetch('https://api.tvmaze.com/shows/82/episodes')
-    .then((response) => {
-      if (response.ok){
-        return response.json();
-      } else {
-        console.log("Error") 
-      }
-    })
-    .then((data) => {
-      allEpisodes = data
-    }); 
-
-
-
-
-
-
+let allEpisodesFromApi;
+let allShows
+let tvShowIndex
+let countEpisodes = document.querySelector("#count-episodes")
+let selectEpisodes 
+let mainDiv = document.querySelector("#main-div");
 
 
 function setup() {
     
-    
-    createAllCards(allEpisodes)
-    serchBarFunction()
-    createSelectandChoose(allEpisodes)
+    allShows = getAllShows()
+    serchBarFunction() 
+    selectTvShow(allShows)
   }
+
+
+// creating all episode cards on page
 
 function createAllCards(givenEpisodes){
   givenEpisodes.map((episode)=>{
-    return createNewEpisodeCard(episode)
+    createNewEpisodeCard(episode)
   })
 }
 
@@ -43,8 +30,9 @@ function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   rootElem.textContent = `Got ${episodeList.length} episode(s)`;
 }
-
 window.onload = setup;
+
+// create single card
 
 function createNewEpisodeCard(objectEpisod){
   let mainDiv =document.querySelector("#main-div");
@@ -52,12 +40,10 @@ function createNewEpisodeCard(objectEpisod){
   newCard.classList.add("card")
   let headerCardSection = document.createElement("section")
   headerCardSection.classList.add("title-of-episode")
-  let headerTitle = document.createElement("span")
+  let headerTitle = document.createElement("p")
   headerTitle.innerText = objectEpisod["name"]
-  let headerEpisode = document.createElement("span")
-  headerEpisode.innerText = `-E${objectEpisod.number.toString().padStart(2, "0")}`
   let headerSeson = document.createElement("span")
-  headerSeson.innerText = `-S${objectEpisod.season.toString().padStart(2, "0")}`
+  headerSeson.innerText = `-E${objectEpisod.number.toString().padStart(2, "0")} -S${objectEpisod.season.toString().padStart(2, "0")}`
   let imageSection = document.createElement("img")
   let objectImage = objectEpisod.image
   imageSection.src = objectImage.medium
@@ -70,13 +56,14 @@ function createNewEpisodeCard(objectEpisod){
   mainDiv.appendChild(newCard)
   newCard.appendChild(headerCardSection)
   headerCardSection.appendChild(headerTitle)
-  headerCardSection.appendChild(headerEpisode)
   headerCardSection.appendChild(headerSeson)
   newCard.appendChild(imageSection)
   newCard.appendChild(description)
 }
 
- let countEpisodes = document.querySelector("#count-episodes")
+
+
+// search bar 
 
 function serchBarFunction(){
     let searchBar = document.querySelector("#search")
@@ -97,10 +84,10 @@ function serchBarFunction(){
   
 }
 
-let selectEpisodes 
-let mainDiv = document.querySelector("#main-div");
+// select Episode
 
-function createSelectandChoose (givenEpisode){
+
+function createSelectandChooseEpisode (givenEpisode){
   selectEpisodes = document.querySelector("#select-episodes")
   givenEpisode.map((episode)=>{
     let optionElement = document.createElement("option")
@@ -118,6 +105,57 @@ function createSelectandChoose (givenEpisode){
     }) 
   }) 
 }
+
+//select TV Show
+
+function selectTvShow(tvShow){
+    let selectShow = document.querySelector("#select-tv-show")
+    
+    tvShow.map((oneShow) =>{
+      let optionShow = document.createElement("option")
+      optionShow.innerText = oneShow.name
+      selectShow.appendChild(optionShow)
+    })
+     selectShow.addEventListener("change", (event) => {
+      let currentShow = event.target.value
+      console.log (currentShow)
+      tvShow.forEach((show) => {
+        if(show.name === currentShow){
+          tvShowIndex = show.id
+          mainDiv.innerHTML = ""
+          fetchShows(tvShowIndex)
+          console.log(show)
+        }
+      })
+     })
+}
+
+// fetch different shows
+
+function fetchShows(result){
+fetch(`https://api.tvmaze.com/shows/${result}/episodes`)
+    .then((response) => {
+      if (response.ok){
+        return response.json();
+      } else {
+        console.log("Error") 
+      }
+    })
+    .then((data) => {
+      allEpisodes = data
+      createAllCards(allEpisodes)
+      createSelectandChooseEpisode(allEpisodes)
+    });
+    
+}
+
+
+
+
+
+
+
+
 
  
 

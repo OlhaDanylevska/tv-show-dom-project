@@ -12,14 +12,17 @@
     <!-- <div id="root">
     </div> -->
     <img class="logo_image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Game_of_Thrones_2011_logo.svg/2560px-Game_of_Thrones_2011_logo.svg.png">
+    <section>
+      <input id="search" type="search" pattern=".*\S.*" required>
+      <img src="https://www.iconpacks.net/icons/2/free-search-icon-2903-thumb.png" id="input_img">
+    </section>
     <div id="searchbar-wraper">
+      <label for="select-tv-show">Select TV Show</label>
+      <select for="select-tv-show" id="select-tv-show"></select>
+      <label for="select-episodes">Select Episode</label>
       <select for="select-episodes" id="select-episodes"></select>
-      <form>
-        <input id="search" type="search" pattern=".*\S.*" required>
-        <img src="https://www.iconpacks.net/icons/2/free-search-icon-2903-thumb.png" id="input_img">
-      </form>
-      
     </div>
+    
     <label for="search" id="count-episodes">Displaing 73 of 73</label>
     <div id="main-div"></div>  
   
@@ -28,7 +31,7 @@
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
-
+    <script src="shows.js"></script>
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
   </body>
