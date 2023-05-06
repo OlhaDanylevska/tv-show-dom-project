@@ -6,6 +6,7 @@ let allEpisodesFromApi;
 let allShows
 let tvShowIndex
 let countEpisodes = document.querySelector("#count-episodes")
+countEpisodes.classList.add("counter")
 let selectEpisodes 
 let mainDiv = document.querySelector("#main-div");
 
@@ -15,6 +16,11 @@ function setup() {
     allShows = getAllShows()
     serchBarFunction() 
     selectTvShow(allShows)
+    // let allEpisodesForBegining = getAllEpisodes()
+    // createSelectandChooseEpisode (allEpisodesForBegining)
+   countEpisodes.innerText = `Displaying 0 of 0`
+
+   
   }
 
 
@@ -41,9 +47,7 @@ function createNewEpisodeCard(objectEpisod){
   let headerCardSection = document.createElement("section")
   headerCardSection.classList.add("title-of-episode")
   let headerTitle = document.createElement("p")
-  headerTitle.innerText = objectEpisod["name"]
-  let headerSeson = document.createElement("span")
-  headerSeson.innerText = `-E${objectEpisod.number.toString().padStart(2, "0")} -S${objectEpisod.season.toString().padStart(2, "0")}`
+  headerTitle.innerText = `${objectEpisod["name"]} -E${objectEpisod.number.toString().padStart(2, "0")} -S${objectEpisod.season.toString().padStart(2, "0")}`
   let imageSection = document.createElement("img")
   let objectImage = objectEpisod.image
   imageSection.src = objectImage.medium
@@ -56,7 +60,6 @@ function createNewEpisodeCard(objectEpisod){
   mainDiv.appendChild(newCard)
   newCard.appendChild(headerCardSection)
   headerCardSection.appendChild(headerTitle)
-  headerCardSection.appendChild(headerSeson)
   newCard.appendChild(imageSection)
   newCard.appendChild(description)
 }
@@ -67,8 +70,8 @@ function createNewEpisodeCard(objectEpisod){
 
 function serchBarFunction(){
     let searchBar = document.querySelector("#search")
-    searchBar.addEventListener( "keyup", (e) => {
-      let searchString = e.target.value.toLowerCase()
+    searchBar.addEventListener( "keyup", (event) => {
+      let searchString = event.target.value.toLowerCase()
 
         filteredNames = allEpisodes.filter((episode)=>{
           return (
@@ -90,8 +93,13 @@ function serchBarFunction(){
 function createSelectandChooseEpisode (givenEpisode){
   selectEpisodes = document.querySelector("#select-episodes")
   selectEpisodes.innerHTML = ""
-  givenEpisode.map((episode)=>{
+
     let optionElement = document.createElement("option")
+    optionElement.innerText = "Select Episode"
+    selectEpisodes.appendChild(optionElement)
+
+  givenEpisode.map((episode)=>{
+    optionElement = document.createElement("option")
     optionElement.innerText = `${episode.name} -E${episode.number.toString().padStart(2, "0")}-S${episode.season.toString().padStart(2, "0")}`
     selectEpisodes.appendChild(optionElement)
   })
@@ -102,8 +110,11 @@ function createSelectandChooseEpisode (givenEpisode){
       if(currentValue.includes(episode.name)){
         mainDiv.innerHTML = ""
         createNewEpisodeCard(episode)
+        countEpisodes.innerText = `Displaying 1 of ${allEpisodes.length}`
+        
       }
     }) 
+
   }) 
 }
 
@@ -111,22 +122,24 @@ function createSelectandChooseEpisode (givenEpisode){
 
 function selectTvShow(tvShow){
     let selectShow = document.querySelector("#select-tv-show")
-    
-    tvShow.map((oneShow) =>{
       let optionShow = document.createElement("option")
-      optionShow.innerHTML = ""
+      optionShow.innerText = "Select TV Show"
+      selectShow.appendChild(optionShow)
+
+    tvShow.map((oneShow) =>{
+      optionShow = document.createElement("option")
       optionShow.innerText = oneShow.name
       selectShow.appendChild(optionShow)
     })
+    
+
      selectShow.addEventListener("change", (event) => {
       let currentShow = event.target.value
-      console.log (currentShow)
       tvShow.forEach((show) => {
         if(show.name === currentShow){
           tvShowIndex = show.id
           mainDiv.innerHTML = ""
           fetchShows(tvShowIndex)
-          console.log(show)
         }
       })
      })
@@ -147,6 +160,8 @@ fetch(`https://api.tvmaze.com/shows/${result}/episodes`)
       allEpisodes = data
       createAllCards(allEpisodes)
       createSelectandChooseEpisode(allEpisodes)
+      countEpisodes.innerText = `Displaying ${allEpisodes.length} of ${allEpisodes.length}`
+
     });
     
 }
