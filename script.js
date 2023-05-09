@@ -95,10 +95,10 @@ function createSelectandChooseEpisode (givenEpisode){
   selectEpisodes.innerHTML = ""
 
     let optionElement = document.createElement("option")
-    optionElement.innerText = "Select Episode"
+    optionElement.innerText = "All Episodes"
     selectEpisodes.appendChild(optionElement)
 
-  givenEpisode.map((episode)=>{
+    givenEpisode.map((episode)=>{
     optionElement = document.createElement("option")
     optionElement.innerText = `${episode.name} -E${episode.number.toString().padStart(2, "0")}-S${episode.season.toString().padStart(2, "0")}`
     selectEpisodes.appendChild(optionElement)
@@ -106,17 +106,22 @@ function createSelectandChooseEpisode (givenEpisode){
 
   selectEpisodes.addEventListener("change", (event) =>{
     let currentValue = event.target.value
-    givenEpisode.forEach((episode) =>{
-      if(currentValue.includes(episode.name)){
-        mainDiv.innerHTML = ""
-        createNewEpisodeCard(episode)
-        countEpisodes.innerText = `Displaying 1 of ${allEpisodes.length}`
-        
-      }
-    }) 
-
+    if(currentValue === "All Episodes"){
+      createAllCards(givenEpisode)
+      countEpisodes.innerText = `${allEpisodes.length} of ${allEpisodes.length}`
+    } else{
+      givenEpisode.forEach((episode) =>{
+        if(currentValue.includes(episode.name)){
+          mainDiv.innerHTML = ""
+          createNewEpisodeCard(episode)
+          countEpisodes.innerText = `Displaying 1 of ${allEpisodes.length}`
+        }
+      }) 
+    }
   }) 
 }
+
+
 
 //select TV Show
 

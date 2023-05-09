@@ -38,13 +38,31 @@ body{
 }
 
 #search{
-  border: solid rgb(93, 93, 93) 0.01rem;
-  background-color: rgb(93, 93, 93);
-  border-radius: 0.2rem;
-  height: 2rem;
-  text-align: end;
+
+  border: solid rgb(93, 93, 93) 0.1rem;
+  background-color: rgb(93, 93, 93, 0.2);
+  border-radius: 2rem;
+  height: 2.6rem;
+  text-decoration: none;
+  text-align: start;
   width: 100%;
   position: relative;
+  padding-left: 1rem;
+  margin-right: -0.2rem;
+  color: white;
+  
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+#search:focus, #select-tv-show:focus, #select-episodes:focus{
+  outline: none;
+  
 }
 
 .logo_image{
@@ -54,17 +72,21 @@ body{
 
 #input_img{
 position: absolute;
-width: 1.5rem;
-margin-left: 0.3rem;
+width: 1.8rem;
+align-items: end;
+padding-right: 0.8rem;
 }
 
-section {
+
+
+.section {
   height: 2rem;
-  text-align: end;
   width: 70%;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: end;
+
 }
 
 
