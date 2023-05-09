@@ -9,6 +9,7 @@ let countEpisodes = document.querySelector("#count-episodes")
 countEpisodes.classList.add("counter")
 let selectEpisodes 
 let mainDiv = document.querySelector("#main-div");
+let searchBar
 
 
 function setup() {
@@ -69,8 +70,8 @@ function createNewEpisodeCard(objectEpisod){
 // search bar 
 
 function serchBarFunction(){
-    let searchBar = document.querySelector("#search")
-    searchBar.addEventListener( "keyup", (event) => {
+    searchBar = document.querySelector("#search")
+    searchBar.addEventListener( "input", (event) => {
       let searchString = event.target.value.toLowerCase()
 
         filteredNames = allEpisodes.filter((episode)=>{
@@ -80,7 +81,7 @@ function serchBarFunction(){
           )
         })
         countEpisodes.innerText = `Displaying ${filteredNames.length} of ${allEpisodes.length}`
-        let mainDiv = document.querySelector("#main-div");
+        mainDiv = document.querySelector("#main-div");
         mainDiv.innerHTML = ""
         createAllCards(filteredNames)
     })
@@ -139,6 +140,7 @@ function selectTvShow(tvShow){
     
 
      selectShow.addEventListener("change", (event) => {
+      searchBar.value = ""
       let currentShow = event.target.value
       tvShow.forEach((show) => {
         if(show.name === currentShow){
