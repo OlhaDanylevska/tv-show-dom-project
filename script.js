@@ -127,16 +127,24 @@ function createSelectandChooseEpisode (givenEpisode){
 //select TV Show
 
 function selectTvShow(tvShow){
-    let selectShow = document.querySelector("#select-tv-show")
+    
+  let selectShow = document.querySelector("#select-tv-show")
       let optionShow = document.createElement("option")
       optionShow.innerText = "Select TV Show"
       selectShow.appendChild(optionShow)
 
-    tvShow.map((oneShow) =>{
+    let dropdownOfShows = tvShow.map((oneShow) =>{
+      return oneShow.name
+    })
+
+    let finalDropDown = dropdownOfShows.sort()
+
+    finalDropDown.map((singlOption)=>{
       optionShow = document.createElement("option")
-      optionShow.innerText = oneShow.name
+      optionShow.innerText = singlOption
       selectShow.appendChild(optionShow)
     })
+    
     
 
      selectShow.addEventListener("change", (event) => {
