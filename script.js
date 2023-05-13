@@ -21,8 +21,7 @@ function setup() {
     // createSelectandChooseEpisode (allEpisodesForBegining)
    countEpisodes.innerText = `Displaying 0 of 0`
 
-   
-  }
+}
 
 
 // creating all episode cards on page
@@ -70,22 +69,30 @@ function createNewEpisodeCard(objectEpisod){
 // search bar 
 
 function serchBarFunction(){
-    searchBar = document.querySelector("#search")
-    searchBar.addEventListener( "input", (event) => {
-      let searchString = event.target.value.toLowerCase()
+  searchBar = document.querySelector("#search")
+  searchBar.addEventListener( "input", handlesSearchChange)
+     
+}
 
-        filteredNames = allEpisodes.filter((episode)=>{
-          return (
-            episode.name.toLowerCase().includes(searchString) || 
-            episode.summary.toLowerCase().includes(searchString)
-          )
-        })
+function handlesSearchChange (event){
+   let searchString = event.target.value.toLowerCase()
+
+        filterTheEpisodes (allEpisodes, searchString)
+        
         countEpisodes.innerText = `Displaying ${filteredNames.length} of ${allEpisodes.length}`
         mainDiv = document.querySelector("#main-div");
         mainDiv.innerHTML = ""
         createAllCards(filteredNames)
-    })
-  
+}
+
+function filterTheEpisodes (allEpisodes, searchStringArgument){
+
+  filteredNames = allEpisodes.filter((episode)=>{
+          return (
+            episode.name.toLowerCase().includes(searchStringArgument) || 
+            episode.summary.toLowerCase().includes(searchStringArgument)
+          )
+        })
 }
 
 // select Episode
@@ -145,8 +152,6 @@ function selectTvShow(tvShow){
       selectShow.appendChild(optionShow)
     })
     
-    
-
      selectShow.addEventListener("change", (event) => {
       searchBar.value = ""
       let currentShow = event.target.value
