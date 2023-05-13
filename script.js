@@ -17,8 +17,7 @@ function setup() {
     allShows = getAllShows()
     serchBarFunction() 
     selectTvShow(allShows)
-    // let allEpisodesForBegining = getAllEpisodes()
-    // createSelectandChooseEpisode (allEpisodesForBegining)
+
    countEpisodes.innerText = `Displaying 0 of 0`
 
 }
@@ -77,12 +76,11 @@ function serchBarFunction(){
 function handlesSearchChange (event){
    let searchString = event.target.value.toLowerCase()
 
-        filterTheEpisodes (allEpisodes, searchString)
-        
-        countEpisodes.innerText = `Displaying ${filteredNames.length} of ${allEpisodes.length}`
-        mainDiv = document.querySelector("#main-div");
-        mainDiv.innerHTML = ""
-        createAllCards(filteredNames)
+      filterTheEpisodes (allEpisodes, searchString)
+      countEpisodes.innerText = `Displaying ${filteredNames.length} of ${allEpisodes.length}`
+      mainDiv = document.querySelector("#main-div");
+       mainDiv.innerHTML = ""
+      createAllCards(filteredNames)
 }
 
 function filterTheEpisodes (allEpisodes, searchStringArgument){
@@ -95,7 +93,7 @@ function filterTheEpisodes (allEpisodes, searchStringArgument){
         })
 }
 
-// select Episode
+// select Episode // select Episode // select Episode // select Episode // select Episode // select Episode
 
 
 function createSelectandChooseEpisode (givenEpisode){
@@ -106,19 +104,19 @@ function createSelectandChooseEpisode (givenEpisode){
     optionElement.innerText = "All Episodes"
     selectEpisodes.appendChild(optionElement)
 
-    givenEpisode.map((episode)=>{
-    optionElement = document.createElement("option")
-    optionElement.innerText = `${episode.name} -E${episode.number.toString().padStart(2, "0")}-S${episode.season.toString().padStart(2, "0")}`
-    selectEpisodes.appendChild(optionElement)
-  })
+    createingAllEpisodesOnPage(givenEpisode)
+    selectEpisodes.addEventListener("change", dropDownOnClickEpisode) 
+}
 
-  selectEpisodes.addEventListener("change", (event) =>{
-    let currentValue = event.target.value
-    if(currentValue === "All Episodes"){
+// dropdown when click
+
+function dropDownOnClickEpisode(event){
+  let currentValue = event.target.value
+   if(currentValue === "All Episodes"){
       createAllCards(givenEpisode)
       countEpisodes.innerText = `${allEpisodes.length} of ${allEpisodes.length}`
-    } else{
-      givenEpisode.forEach((episode) =>{
+    } else {
+      allEpisodes.forEach((episode) =>{
         if(currentValue.includes(episode.name)){
           mainDiv.innerHTML = ""
           createNewEpisodeCard(episode)
@@ -126,12 +124,22 @@ function createSelectandChooseEpisode (givenEpisode){
         }
       }) 
     }
-  }) 
 }
 
+// create all Episodes on Page
+
+function createingAllEpisodesOnPage(givenEpisode){
+  givenEpisode.map((episode)=>{
+      optionElement = document.createElement("option")
+      optionElement.innerText = `${episode.name} -E${episode.number.toString().padStart(2, "0")}-S${episode.season.toString().padStart(2, "0")}`
+      selectEpisodes.appendChild(optionElement)
+    })
+}
+    
 
 
-//select TV Show
+
+//select TV Show //select TV Show //select TV Show //select TV Show //select TV Show
 
 function selectTvShow(tvShow){
     
@@ -144,25 +152,33 @@ function selectTvShow(tvShow){
       return oneShow.name
     })
 
-    let finalDropDown = dropdownOfShows.sort()
+    dropdownForTVShows(dropdownOfShows, selectShow)
+    selectShow.addEventListener("change", dropdownOnClick)
+}
+// select tv show from Dropdown and passing it to EventListener 
 
-    finalDropDown.map((singlOption)=>{
-      optionShow = document.createElement("option")
-      optionShow.innerText = singlOption
-      selectShow.appendChild(optionShow)
-    })
-    
-     selectShow.addEventListener("change", (event) => {
-      searchBar.value = ""
+function dropdownOnClick(event){
+  searchBar.value = ""
       let currentShow = event.target.value
-      tvShow.forEach((show) => {
+      allShows.forEach((show) => {
         if(show.name === currentShow){
           tvShowIndex = show.id
           mainDiv.innerHTML = ""
           fetchShows(tvShowIndex)
         }
       })
-     })
+}
+
+// Dropdown for TV Shows
+
+function dropdownForTVShows(someDropDown, selectShow){
+    let finalDropDown = someDropDown.sort()
+
+    finalDropDown.map((singlOption)=>{
+      optionShow = document.createElement("option")
+      optionShow.innerText = singlOption
+      selectShow.appendChild(optionShow)
+    })
 }
 
 // fetch different shows
