@@ -11,12 +11,15 @@ let selectEpisodes
 let mainDiv = document.querySelector("#main-div");
 let searchBar
 
+let oneShow = getOneShow()
+
 
 function setup() {
     
     allShows = getAllShows()
     serchBarFunction() 
     selectTvShow(allShows)
+    createTVShowSingleCard(oneShow)
 
    countEpisodes.innerText = `Displaying 0 of 0`
 
@@ -200,6 +203,57 @@ fetch(`https://api.tvmaze.com/shows/${result}/episodes`)
 
     });
     
+}
+
+
+function createTVShowSingleCard(objectTVShows){
+  let tvShowMainHolder = document.createElement("div")
+  tvShowMainHolder.classList.add("TVShow-main-holder")
+  let tvShowCardHeader = document.createElement("h2")
+  tvShowCardHeader.classList.add("TVShow-Card-Header")
+  tvShowCardHeader.innerText = objectTVShows.name
+  let innerHolder = document.createElement("div")
+  innerHolder.classList.add("inner-Holder")
+
+  let tvShowImage = document.createElement("img")
+  tvShowImage.classList.add("tvShow-Image")
+  tvShowImage.src = objectTVShows.image.medium
+
+  let tvShowDescription = document.createElement("p")
+  tvShowDescription.classList.add("tvShow-Description")
+  tvShowDescription.innerText = objectTVShows.summary
+
+  let tvShowInfoCard = document.createElement("div")
+  tvShowInfoCard.classList.add("tvShow-info-card")
+
+  infoCardRate = document.createElement("h4")
+  infoCardRate.classList.add("info-card-list")
+  infoCardRate.innerText = `Rated: ${objectTVShows.rating.average}`
+
+  infoCardGenres = document.createElement("h4")
+  infoCardGenres.classList.add("info-card-list")
+  infoCardGenres.innerText = `Genres: ${objectTVShows.genres}`
+
+  infoCardStatus = document.createElement("h4")
+  infoCardStatus.classList.add("info-card-list")
+  infoCardStatus.innerText = `Status: ${objectTVShows.status}`
+
+  infoCardRuntime = document.createElement("h4")
+  infoCardRuntime.classList.add("info-card-list")
+  infoCardRuntime.innerText = `Runtime: ${objectTVShows.runtime}`
+  
+  innerHolder.appendChild(tvShowImage)
+  innerHolder.appendChild(tvShowDescription)
+  innerHolder.appendChild(tvShowInfoCard)
+
+  tvShowInfoCard.appendChild(infoCardRate)
+  tvShowInfoCard.appendChild(infoCardGenres)
+  tvShowInfoCard.appendChild(infoCardStatus)
+  tvShowInfoCard.appendChild(infoCardRuntime)
+
+  tvShowMainHolder.appendChild(tvShowCardHeader)
+  tvShowMainHolder.appendChild(innerHolder)
+  mainDiv.appendChild(tvShowMainHolder)
 }
 
 

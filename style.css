@@ -142,4 +142,63 @@ padding-right: 0.8rem;
   justify-content: center;
 }
 
+.TVShow-main-holder{
+  font-family: 'Montserrat', sans-serif;
+  width: 80%;
+  background-color: rgb(67, 67, 67, 20);
+  border-radius: 0.3rem;
+}
+
+.TVShow-Card-Header{
+  margin-left: 1rem;
+  color: white;
+
+}
+
+.tvShow-Image{
+  height: 13rem;
+  margin-left: 1rem;
+
+
+}
+
+.inner-Holder{
+  width: 100%;
+  min-height: 15rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap:inherit;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(224, 224, 224, 0.605);
+  border-radius: 0  0 0.3rem 0.3rem;
+
+}
+
+.tvShow-Description{
+  font-size: 0.9rem;
+  text-align: justify;
+  
+}
+
+.tvShow-info-card{
+  min-width: 15rem;
+  background-color: rgb(196, 84, 24);
+  margin-right: 1rem;
+  border-radius: 0.3rem;
+  color: white;
+  font-size: 0.8rem;
+  height: 13rem;
+
+  
+
+}
+
+.info-card-list{
+  margin: 1rem;
+
+
+}
+
 
