@@ -19,7 +19,7 @@ function setup() {
     allShows = getAllShows()
     serchBarFunction() 
     selectTvShow(allShows)
-    createTVShowSingleCard(oneShow)
+    createAllTVShowsOnPage(allShows)
 
    countEpisodes.innerText = `Displaying 0 of 0`
 
@@ -205,11 +205,12 @@ fetch(`https://api.tvmaze.com/shows/${result}/episodes`)
     
 }
 
+//createSingleTVShowCard
 
 function createTVShowSingleCard(objectTVShows){
   let tvShowMainHolder = document.createElement("div")
   tvShowMainHolder.classList.add("TVShow-main-holder")
-  let tvShowCardHeader = document.createElement("h2")
+  let tvShowCardHeader = document.createElement("h3")
   tvShowCardHeader.classList.add("TVShow-Card-Header")
   tvShowCardHeader.innerText = objectTVShows.name
   let innerHolder = document.createElement("div")
@@ -230,9 +231,10 @@ function createTVShowSingleCard(objectTVShows){
   infoCardRate.classList.add("info-card-list")
   infoCardRate.innerText = `Rated: ${objectTVShows.rating.average}`
 
-  infoCardGenres = document.createElement("h4")
+  let infoCardGenres = document.createElement("h2")
   infoCardGenres.classList.add("info-card-list")
-  infoCardGenres.innerText = `Genres: ${objectTVShows.genres}`
+  infoCardGenres.innerText = `Genres: ${(objectTVShows.genres).join(", ")}`
+
 
   infoCardStatus = document.createElement("h4")
   infoCardStatus.classList.add("info-card-list")
@@ -255,6 +257,18 @@ function createTVShowSingleCard(objectTVShows){
   tvShowMainHolder.appendChild(innerHolder)
   mainDiv.appendChild(tvShowMainHolder)
 }
+
+//createAllTVShowCard
+
+function createAllTVShowsOnPage(allTVShows){
+  allTVShows.map((oneTVShow)=>{
+    createTVShowSingleCard(oneTVShow)
+  })
+    
+}
+
+
+
 
 
 
