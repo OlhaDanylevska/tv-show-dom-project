@@ -10,18 +10,22 @@ countEpisodes.classList.add("counter")
 let selectEpisodes 
 let mainDiv = document.querySelector("#main-div");
 let searchBar
+let searchBarShows
 
 let oneShow = getOneShow()
 
 
 function setup() {
+  document.querySelector(".section").style.display = "none"
+  allShows = getAllShows()
+  createSearchForTVShows() 
+  serchBarFunction()
+  selectTvShow(allShows)
+  serchBarTvShows()
+  
     
-    allShows = getAllShows()
-    serchBarFunction() 
-    selectTvShow(allShows)
-    createAllTVShowsOnPage(allShows)
-
    countEpisodes.innerText = `Displaying 0 of 0`
+   createAllTVShowsOnPage(allShows)
 
 }
 
@@ -144,12 +148,14 @@ function createingAllEpisodesOnPage(givenEpisode){
 
 //select TV Show //select TV Show //select TV Show //select TV Show //select TV Show
 
+let selectShow
+
 function selectTvShow(tvShow){
-    
-  let selectShow = document.querySelector("#select-tv-show")
-      let optionShow = document.createElement("option")
-      optionShow.innerText = "Select TV Show"
-      selectShow.appendChild(optionShow)
+  let searchShowsHolder = document.querySelector("#search-shows-main")
+  
+      selectShow = document.querySelector("#select-tv-show")
+      
+      searchShowsHolder.appendChild(selectShow)
 
     let dropdownOfShows = tvShow.map((oneShow) =>{
       return oneShow.name
@@ -161,7 +167,9 @@ function selectTvShow(tvShow){
 // select tv show from Dropdown and passing it to EventListener 
 
 function dropdownOnClick(event){
+  document.querySelector(".section").style.display = "flex"
   searchBar.value = ""
+  searchBarShows.value = ""
       let currentShow = event.target.value
       allShows.forEach((show) => {
         if(show.name === currentShow){
@@ -175,6 +183,10 @@ function dropdownOnClick(event){
 // Dropdown for TV Shows
 
 function dropdownForTVShows(someDropDown, selectShow){
+    selectShow.innerHTML = ""
+    let optionShow = document.createElement("option")
+      optionShow.innerText = "Select TV Show"
+      selectShow.appendChild(optionShow)
     let finalDropDown = someDropDown.sort()
 
     finalDropDown.map((singlOption)=>{
@@ -198,6 +210,7 @@ fetch(`https://api.tvmaze.com/shows/${result}/episodes`)
     .then((data) => {
       allEpisodes = data
       createAllCards(allEpisodes)
+      console.log(createSelectandChooseEpisode(allEpisodes))
       createSelectandChooseEpisode(allEpisodes)
       countEpisodes.innerText = `Displaying ${allEpisodes.length} of ${allEpisodes.length}`
 
@@ -266,6 +279,59 @@ function createAllTVShowsOnPage(allTVShows){
   })
     
 }
+
+
+// search for TV Shows
+let counterForShows
+
+function createSearchForTVShows (){
+  let searchShowsHolder = document.querySelector("#search-shows-main")
+  let searchShows = document.createElement("input")
+  searchShows.type = "search"
+  searchShows.classList.add("search-shows")
+  searchShowsHolder.appendChild(searchShows)
+  counterForShows = document.createElement("p")
+  counterForShows.classList.add("count-shows")
+
+  searchShowsHolder.appendChild(counterForShows)
+  counterForShows.innerText = `Found ${allShows.length} shows`
+}
+
+// search bar 
+
+
+function serchBarTvShows(){
+  searchBarShows = document.querySelector(".search-shows")
+  searchBarShows.addEventListener( "input", forEventTVShow)
+     
+}
+
+let filteredShows
+
+function forEventTVShow(event){
+
+  let searchingValue = event.target.value.toLowerCase()
+  filterTvShows(allShows, searchingValue)
+  mainDiv.innerHTML = "";
+  createAllTVShowsOnPage(filteredShows)
+  counterForShows.innerText = `Found ${filteredShows.length} shows`
+
+    let newdropdownOfShows = filteredShows.map((oneShow) =>{
+        return oneShow.name
+      })
+
+  console.log(newdropdownOfShows)
+  dropdownForTVShows(newdropdownOfShows, selectShow)
+}
+
+function filterTvShows(allTvShows, searchValueArgument){
+  filteredShows = allTvShows.filter((singleShow)=>{
+    return (singleShow.name.toLowerCase().includes(searchValueArgument) ||
+    singleShow.summary.toLowerCase().includes(searchValueArgument))
+  })
+
+}
+
 
 
 

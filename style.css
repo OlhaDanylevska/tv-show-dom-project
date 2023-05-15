@@ -161,6 +161,7 @@ padding-right: 0.8rem;
 .tvShow-Image{
   height: 13rem;
   margin-left: 1rem;
+  margin-top: 1rem;
 
 
 }
@@ -173,7 +174,7 @@ padding-right: 0.8rem;
   flex-wrap:inherit;
   gap: 1rem;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   background-color: rgba(224, 224, 224, 0.605);
   border-radius: 0  0 0.3rem 0.3rem;
 
@@ -195,6 +196,7 @@ padding-right: 0.8rem;
   height: 13rem;
   background-color: rgb(255, 255, 255, 20%);
   border: solid rgb(255, 255, 255) 0.03rem;
+  margin-top: 1rem;
   
 
 }
@@ -205,6 +207,35 @@ padding-right: 0.8rem;
   font-size: 0.8rem;
 }
 
+.search-shows{
+  border: solid rgb(93, 93, 93) 0.1rem;
+    background-color: rgb(93, 93, 93, 0.2);
+    border-radius: 2rem;
+    height: 2.1rem;
+    text-decoration: none;
+    text-align: start;
+    width: 15rem;
+    padding-left: 1rem;
+    color: white;
+}
+.search-shows:focus{
+  outline: none;
+  color: white;
+}
+
+#search-shows-main{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+.count-shows{
+  color: rgb(196, 84, 24);
+  font-size: 0.8rem;
+
+}
 
 
 
