@@ -11,21 +11,27 @@ let selectEpisodes
 let mainDiv = document.querySelector("#main-div");
 let searchBar
 let searchBarShows
+let counterForShows
 
 let oneShow = getOneShow()
 
 
 function setup() {
   document.querySelector(".section").style.display = "none"
+  document.querySelector("#select-episodes").style.display= "none"
   allShows = getAllShows()
   createSearchForTVShows() 
   serchBarFunction()
   selectTvShow(allShows)
   serchBarTvShows()
+  createBackButton()
+  document.querySelector(".go-back-button").style.display = "none"
   
     
-   countEpisodes.innerText = `Displaying 0 of 0`
-   createAllTVShowsOnPage(allShows)
+  document.querySelector("#count-episodes").style.display = "none"
+
+  displayBackAllTVShows(allShows)
+  createAllTVShowsOnPage(allShows)
 
 }
 
@@ -153,21 +159,29 @@ let selectShow
 function selectTvShow(tvShow){
   let searchShowsHolder = document.querySelector("#search-shows-main")
   
-      selectShow = document.querySelector("#select-tv-show")
-      
+      selectShow = document.querySelector("#select-tv-show") 
       searchShowsHolder.appendChild(selectShow)
 
-    let dropdownOfShows = tvShow.map((oneShow) =>{
-      return oneShow.name
-    })
+      let dropdownOfShows = tvShow.map((oneShow) =>{
+        return oneShow.name
+      })
 
     dropdownForTVShows(dropdownOfShows, selectShow)
     selectShow.addEventListener("change", dropdownOnClick)
 }
 // select tv show from Dropdown and passing it to EventListener 
 
+
+
 function dropdownOnClick(event){
   document.querySelector(".section").style.display = "flex"
+  document.querySelector("#select-episodes").style.display = "block"
+  document.querySelector("#select-tv-show").style.display = "none"
+  document.querySelector(".count-shows").style.display = "none"
+  document.querySelector(".search-shows").style.display = "none" 
+  document.querySelector(".go-back-button").style.display = "block"
+  document.querySelector("#count-episodes").style.display = "block"
+
   searchBar.value = ""
   searchBarShows.value = ""
       let currentShow = event.target.value
@@ -179,6 +193,40 @@ function dropdownOnClick(event){
         }
       })
 }
+
+
+//create back BUTTON
+
+
+
+function createBackButton(){
+    
+    let backButton = document.createElement("button")
+    backButton.classList.add("go-back-button")
+    backButton.innerText = "Back to All TV Shows"
+    let searchShowsHolder = document.querySelector("#search-shows-main")
+    searchShowsHolder.appendChild(backButton)
+    backButton.addEventListener("click", displayBackAllTVShows)
+}
+
+
+
+function displayBackAllTVShows(){
+  document.querySelector(".section").style.display = "none"
+  document.querySelector("#select-episodes").style.display= "none"
+  document.querySelector("#select-tv-show").style.display = "block"
+  document.querySelector(".count-shows").style.display = "block"
+  document.querySelector(".search-shows").style.display = "block"
+  document.querySelector(".go-back-button").style.display = "none"
+  document.querySelector("#count-episodes").style.display = "none"
+  mainDiv.innerHTML = "";
+  createAllTVShowsOnPage(allShows)
+  selectShow.innerHTML = ""
+  selectTvShow(allShows)
+}
+
+
+
 
 // Dropdown for TV Shows
 
@@ -282,7 +330,7 @@ function createAllTVShowsOnPage(allTVShows){
 
 
 // search for TV Shows
-let counterForShows
+
 
 function createSearchForTVShows (){
   let searchShowsHolder = document.querySelector("#search-shows-main")
