@@ -157,6 +157,7 @@ function createingAllEpisodesOnPage(givenEpisode){
 let selectShow
 
 function selectTvShow(tvShow){
+
   let searchShowsHolder = document.querySelector("#search-shows-main")
   
       selectShow = document.querySelector("#select-tv-show") 
@@ -184,6 +185,7 @@ function dropdownOnClick(event){
 
   searchBar.value = ""
   searchBarShows.value = ""
+
       let currentShow = event.target.value
       allShows.forEach((show) => {
         if(show.name === currentShow){
@@ -197,8 +199,6 @@ function dropdownOnClick(event){
 
 //create back BUTTON
 
-
-
 function createBackButton(){
     
     let backButton = document.createElement("button")
@@ -209,7 +209,7 @@ function createBackButton(){
     backButton.addEventListener("click", displayBackAllTVShows)
 }
 
-
+// afer we click back button
 
 function displayBackAllTVShows(){
   document.querySelector(".section").style.display = "none"
@@ -222,7 +222,13 @@ function displayBackAllTVShows(){
   mainDiv.innerHTML = "";
   createAllTVShowsOnPage(allShows)
   selectShow.innerHTML = ""
-  selectTvShow(allShows)
+
+  let allShowsBack = allShows.map((oneShow) =>{
+      return oneShow.name
+  })
+
+  dropdownForTVShows(allShowsBack, selectShow)
+  counterForShows.innerText = `Found ${allShowsBack.length} shows`
 }
 
 
@@ -236,6 +242,7 @@ function dropdownForTVShows(someDropDown, selectShow){
       optionShow.innerText = "Select TV Show"
       selectShow.appendChild(optionShow)
     let finalDropDown = someDropDown.sort()
+    
 
     finalDropDown.map((singlOption)=>{
       optionShow = document.createElement("option")
@@ -243,6 +250,7 @@ function dropdownForTVShows(someDropDown, selectShow){
       selectShow.appendChild(optionShow)
     })
 }
+
 
 // fetch different shows
 
@@ -279,7 +287,7 @@ function createTVShowSingleCard(objectTVShows){
 
   let tvShowImage = document.createElement("img")
   tvShowImage.classList.add("tvShow-Image")
-  tvShowImage.src = objectTVShows.image.medium
+  tvShowImage.src = objectTVShows.image?.medium
 
   let tvShowDescription = document.createElement("p")
   tvShowDescription.classList.add("tvShow-Description")
@@ -368,7 +376,6 @@ function forEventTVShow(event){
         return oneShow.name
       })
 
-  console.log(newdropdownOfShows)
   dropdownForTVShows(newdropdownOfShows, selectShow)
 }
 
@@ -377,7 +384,6 @@ function filterTvShows(allTvShows, searchValueArgument){
     return (singleShow.name.toLowerCase().includes(searchValueArgument) ||
     singleShow.summary.toLowerCase().includes(searchValueArgument))
   })
-
 }
 
 
