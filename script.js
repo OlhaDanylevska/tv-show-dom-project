@@ -128,7 +128,7 @@ function dropDownOnClickEpisode(event){
    if(currentValue === "All Episodes"){
       createAllCards(givenEpisode)
       countEpisodes.innerText = `${allEpisodes.length} of ${allEpisodes.length}`
-    } else {
+    } else{
       allEpisodes.forEach((episode) =>{
         if(currentValue.includes(episode.name)){
           mainDiv.innerHTML = ""
@@ -145,6 +145,7 @@ function createingAllEpisodesOnPage(givenEpisode){
   givenEpisode.map((episode)=>{
       optionElement = document.createElement("option")
       optionElement.innerText = `${episode.name} -E${episode.number.toString().padStart(2, "0")}-S${episode.season.toString().padStart(2, "0")}`
+      console.log(episode)
       selectEpisodes.appendChild(optionElement)
     })
 }
@@ -187,12 +188,27 @@ function dropdownOnClick(event){
   searchBarShows.value = ""
 
       let currentShow = event.target.value
+      let archerShow 
       allShows.forEach((show) => {
+        // if(show.name === "Archer"){
+        //   fetch(`http://api.tvmaze.com/shows/315`)
+        //     .then((response) => {
+        //       if (response.ok){
+        //         return response.json();
+        //       } else {
+        //         console.log("Error") 
+        //       }
+        //       })
+        //       .then((data) => {
+        //         archerShow = data
+        //         console.log(archerShow)
+        //       })
+        //     createingAllEpisodesOnPage(archerShow)  
         if(show.name === currentShow){
           tvShowIndex = show.id
           mainDiv.innerHTML = ""
           fetchShows(tvShowIndex)
-        }
+        } 
       })
 }
 
@@ -266,7 +282,6 @@ fetch(`https://api.tvmaze.com/shows/${result}/episodes`)
     .then((data) => {
       allEpisodes = data
       createAllCards(allEpisodes)
-      console.log(createSelectandChooseEpisode(allEpisodes))
       createSelectandChooseEpisode(allEpisodes)
       countEpisodes.innerText = `Displaying ${allEpisodes.length} of ${allEpisodes.length}`
 
