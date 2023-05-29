@@ -1,3 +1,257 @@
 #root {
   color: red;
 }
+
+body{
+  background-color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+
+}
+
+#select-wraper {
+  display: flex;
+  flex-direction:row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#select-episodes, #select-tv-show{
+  border: solid rgb(93, 93, 93) 0.02rem;
+  background-color: rgb(196, 84, 24);
+  color: rgb(255, 255, 255);
+  border-radius: 0.2rem;
+  height: 2rem;
+  width: 15rem;
+  padding: 0 0.5rem;
+}
+
+.counter{
+  color: rgb(196, 84, 24);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+}
+
+#search{
+
+  border: solid rgb(93, 93, 93) 0.1rem;
+  background-color: rgb(93, 93, 93, 0.2);
+  border-radius: 2rem;
+  height: 2.6rem;
+  text-decoration: none;
+  text-align: start;
+  width: 100%;
+  position: relative;
+  padding-left: 1rem;
+  margin-right: -0.2rem;
+  color: white;
+  
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+#search:focus, #select-tv-show:focus, #select-episodes:focus{
+  outline: none;
+  
+}
+
+.logo_image{
+  width: 100%;
+  margin:  0 auto;
+}
+
+#input_img{
+position: absolute;
+width: 1.8rem;
+align-items: end;
+padding-right: 0.8rem;
+}
+
+
+
+.section {
+  height: 2rem;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+
+}
+
+
+
+.title-of-episode{
+
+  min-height: 3rem;
+  border-radius: 0.1rem;
+  width: 100%;
+  background-color: rgb(196, 84, 24);
+  color: rgb(255, 255, 255);
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: line;
+
+}
+
+.card{
+  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.2rem;
+  background-color: rgb(214, 214, 214);
+  min-height: 20rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  
+  border: solid rgb(73, 73, 73) 0.01rem;
+}
+
+.img{
+  max-width: 100%;
+  width: 13rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.description-episode{
+  margin: 1rem;
+  text-align: justify;
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+#main-div{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap:2rem;
+  align-content: center;
+  justify-content: center;
+}
+
+.TVShow-main-holder{
+  font-family: 'Montserrat', sans-serif;
+  width: 80%;
+  background-color: rgba(126, 126, 126, 0.3);
+  border-radius: 0.3rem;
+  border: solid rgb(104, 104, 104) 0.05rem;
+}
+
+.TVShow-Card-Header{
+  margin-left: 1rem;
+  color: rgb(196, 84, 24);
+  font-size: 1.2rem
+
+
+}
+
+.tvShow-Image{
+  height: 13rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+
+
+}
+
+.inner-Holder{
+  width: 100%;
+  min-height: 15rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap:inherit;
+  gap: 1rem;
+  justify-content: center;
+  align-items: start;
+  background-color: rgba(224, 224, 224, 0.605);
+  border-radius: 0  0 0.3rem 0.3rem;
+
+}
+
+.tvShow-Description{
+  font-size: 0.9rem;
+  text-align: justify;
+  
+}
+
+.tvShow-info-card{
+  min-width: 15rem;
+
+  margin-right: 1rem;
+  border-radius: 0.3rem;
+  color: rgb(64, 64, 64);
+  font-size: 0.8rem;
+  height: 13rem;
+  background-color: rgb(255, 255, 255, 20%);
+  border: solid rgb(255, 255, 255) 0.03rem;
+  margin-top: 1rem;
+  
+
+}
+
+.info-card-list{
+  margin: 1rem;
+  color: rgb(0, 0, 0);
+  font-size: 0.8rem;
+}
+
+.search-shows{
+  border: solid rgb(93, 93, 93) 0.1rem;
+    background-color: rgb(93, 93, 93, 0.2);
+    border-radius: 2rem;
+    height: 2.1rem;
+    text-decoration: none;
+    text-align: start;
+    width: 15rem;
+    padding-left: 1rem;
+    color: white;
+}
+.search-shows:focus{
+  outline: none;
+  color: white;
+}
+
+#search-shows-main{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+.count-shows{
+  color: rgb(196, 84, 24);
+  font-size: 0.8rem;
+
+}
+
+.go-back-button{
+  border: solid rgb(255, 255, 255) 0.07rem;
+  background-color: rgba(255, 255, 255, 0.047);
+  border-radius: 2rem;
+  height: 2.6rem;
+  text-decoration: none;
+  text-align: start;
+  width: 10rem;
+  text-align: center;
+  position: relative;
+  color:rgb(255, 255, 255);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+
+}
+
+
+
